@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>채팅</title>
+    <link rel="stylesheet" href="../css/index.css">
+  </head>
+  <body id="body">
+    <div class="top_container">
+      <div class="logo">
+        <p class="logo_text">프렌드</p>
+      </div>
+      <div class="top_button">
+        <a class="home_button" href="home.html">홈</a>
+        <a class="lookcall_button" href="videocell.html">화상 통화</a>
+        <a class="message_button" href="message.html">메세지</a>
+      </div>
+      <div class="top_bording"></div>
+    </div>
+    <div class="main" id="main">
+      <div id="chat">
+      </div>
+      <p id="log"></p>
+    </div>
+    <div class="bottom_container">
+      <div class="inputer">
+        <textarea class="text" id="text" placeholder="메시지를 입력해주세요.."></textarea>
+        <img class="send_msg" id="send_msg" src="../picture/send.png">
+      </div>
+    </div>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/key.js"></script>
+  <script type="module" src="/js/index.js"></script>
+</html>
