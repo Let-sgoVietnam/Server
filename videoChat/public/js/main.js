@@ -11,15 +11,12 @@ var pcConfig = {
        'urls': 'stun:stun.l.google.com:19302'
   }]
 };
-
-
-
-// Set up audio and video regardless of what devices are present.
 var sdpConstraints = {
      offerToReceiveAudio: true,
      offerToReceiveVideo: true
 };
-/////////////////////////////////////////////
+
+
 var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
 
@@ -33,15 +30,12 @@ var constraints = {
 
 console.log('Getting user media with constraints', constraints);
 
-//if (location.hostname !== 'localhost') {
-//  requestTurn(
-//    'https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913'
-//  );
-//}
+
+
 
 var room = 'foo';
-// Could prompt for room name:
-//room = prompt('Enter room name:');
+
+
 
 var socket = io.connect();
 if (room !== '') {
@@ -74,13 +68,13 @@ socket.on('log', function(array) {
   console.log.apply(console, array);
 });
 
-////////////////////////////////////////////////
+
 function sendMessage(message) {
   console.log('Client sending message: ', message);
   socket.emit('message', message);
 }
 
-// This client receives a message
+
 socket.on('message', function(message) {
   console.log('Client received message:', message);
   if (message === 'got user media') {
@@ -104,7 +98,7 @@ socket.on('message', function(message) {
   }
 });
 
-////////////////////////////////////////////////////
+
 function gotStream(stream) {
   console.log('Adding local stream.');
   localStream = stream;
@@ -133,7 +127,7 @@ window.onbeforeunload = function() {
   sendMessage('bye');
 };
 
-/////////////////////////////////////////////////////////
+
 function createPeerConnection() {
   try {
     pc = new RTCPeerConnection(null);
@@ -200,7 +194,7 @@ function requestTurn(turnURL) {
   }
   if (!turnExists) {
     console.log('Getting TURN server from ', turnURL);
-    // No TURN server. Get one from computeengineondemand.appspot.com:
+     
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
@@ -246,31 +240,31 @@ function stop() {
   pc = null;
 }
 
-var b1Color = 0;
-var b2Color = 0;
+var b1Color = 1;
+var b2Color = 1;
 document.getElementById('b1').onclick = b1Click;
 document.getElementById('b2').onclick = b2Click;
 document.getElementById('b3').onclick = b3Click;
 function b1Click() {
-  if(b1Color === 0 ) {
+  if(b1Color === 1 ) {
     document.getElementById('b1').style.backgroundColor = "lightgray";
     document.getElementById('localVideo').muted = true;
-    b1Color = 1;
+    b1Color = 0;
   }else {
     document.getElementById('b1').style.backgroundColor = "#2BDC7D";
     document.getElementById('localVideo').muted = false;
-    b1Color = 0;
+    b1Color = 1;
   }
 }
 function b2Click() {
-  if(b2Color === 0 ) {
+  if(b2Color === 1 ) {
     document.getElementById('b2').style.backgroundColor = "lightgray";
     document.getElementById('localVideo').pause();
-    b2Color = 1;
+    b2Color = 0;
   }else {
     document.getElementById('b2').style.backgroundColor = "#2BDC7D";
     document.getElementById('localVideo').play();
-    b2Color = 0;
+    b2Color = 1;
   }
 }
 function b3Click() {
